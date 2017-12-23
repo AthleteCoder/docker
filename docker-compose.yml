@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: ./client
+    ports:
+    - "80:80"
+    links:
+    - node
+    volumes:
+    - "c:/users/PhoRever/desktop/docker/client:/usr/share/nginx/html"
+  node:
+    build: ./myapp
+    ports:
+    - "3000:3000"
+    depends_on:
+    - "mongo"
+    links:
+    - mongo
+  mongo:
+    image: mongo
+    ports: 
+    - "27017:27017"
